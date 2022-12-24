@@ -2,6 +2,7 @@
 
 # This game script is to practice my control flow within bash
 
+GLOBAL_LEVEL=1
 GLOBAL_EXP=0
 
 # Function for general dialog
@@ -28,6 +29,11 @@ function new_line(){
 function inline(){
 	echo -n "${1} "
 }
+
+if [[ $GLOBAL_EXP -ge 100 ]]; then 
+	echo "level up!"
+	GLOBAL_LEVEL=$(( $GLOBAL_LEVEL + 1 ))
+fi
 
 #Intro
 
@@ -207,25 +213,49 @@ function battle(){
 	done
 	echo "----------------------------------"
 }
-battle
-sleep 3
-battle
-sleep 3
-battle 
-sleep 3 
-battle 
-sleep 3
-battle 
-sleep 3 
-battle 
-sleep 3
-battle 
-sleep 3 
-battle 
-sleep 3
-battle 
-sleep 3 
-battle
-sleep 3 
+
+function battle_loop(){
+	read -p "Walking a monster attacks!
+	1) fight
+	2) run
+	3) run & heal
+	What will you do? " CHOICE
+	case $CHOICE in 
+		1)
+			battle;;
+		2)
+			"You ran";;
+		3)
+			heal;;
+	esac
+}
+
+# Stage 1 loop
+until [[ $GLOBAL_EXP -ge 100 ]]
+do 
+	battle_loop
+
+	if [[ $GLOBAL_EXP -ge 100 ]]; then
+		GLOBAL_LEVEL=$(( $GLOBAL_LEVEL + 1 ))
+		echo "You leveled up!"
+		echo "${GLOBAL_USER_NAME} is now level ${GLOBAL_LEVEL}"
+	fi
+done
+
+# Stage 2 loop
+until [[ $GLOBAL_EXP -ge 150 ]]
+do 
+	battle_loop
+
+	if [[ $GLOBAL_EXP -ge 150 ]]; then
+		GLOBAL_LEVEL=$(( $GLOBAL_LEVEL + 1 ))
+		echo "You leveled up!"
+		echo "${GLOBAL_USER_NAME} is now level ${GLOBAL_LEVEL}"
+	fi
+done
+
+
+
 echo "Woah User:${GLOBAL_USER_NAME} Remaining HP:${GLOBAL_HP} Total Exp:${GLOBAL_EXP}"
+
 

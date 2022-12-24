@@ -26,11 +26,14 @@ echo "
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠋⠀⠞⠁⣰⠇⢨⠏⠀⣾⢁⣸⠀⠀⢸⠀⠀⣥⠀⠀⠸⠇⠀⠀⠈⠀⠀⠀⣀⣠⠶⣫⠷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠋⠀⠞⠀⠐⠛⠊⠛⠃⠀⠿⠃⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"⠀
 
-echo ".."
-sleep 1
-echo "..."
-sleep 1
-echo "...."
 
-read -p "Welcome which scan would you like to run "
+read -p "Welcome which scan would you like to run: 
+1 ) sudo nmap <target_IP> -p- -sV
+" -a USER_OPTION
 
+
+case $USER_OPTION in 
+	1)
+		(sudo nmap ${1} -p- -sV)
+		;;
+	esac
