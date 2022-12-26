@@ -7,7 +7,14 @@
 # create shop front that matches item value
 
 # declaring an associative array (dictionary)
+declare -A items_id
 declare -A items
+
+items_id[1]="Sword"
+items_id[2]="Hat"
+items_id[3]="Coat"
+items_id[4]="Boots"
+items_id[5]="Axe"
 
 # placing items within our associative array
 items['Sword']=5
@@ -15,6 +22,11 @@ items['Hat']=10
 items['Coat']=15
 items['Boots']=17
 items['Axe']=5
+
+read -p "Pick a choice " choice
+if [[ ${items_id[$choice]} -eq 1 ]]; then
+	echo "Value at id1, key1: ${items[0]}"
+fi
 
 # listing out the keys in our associative array
 # echo "Listing keys"

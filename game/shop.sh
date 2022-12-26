@@ -25,10 +25,14 @@ function shop(){
 							[yY]*)
 								read -p "Which item did you like friend? " USER_SELECT
 								if [[ ${items[$USER_SELECT]+_} ]]; then
-									"Valid"
+									echo "That item will be ${items[$USER_SELECT]} gold"
+									echo "You give the shop owner ${items[$USER_SELECT]} gold"
+									GLOBAL_GOLD=$(( $GLOBAL_GOLD - ${items[$USER_SELECT]} ))
+									echo "You have ${GLOBAL_GOLD} remaining "
+									break 2 # Break out of both loops
 								else 
 									echo "Not valid"
-									break 
+									break
 								fi 
 								break;;
 							[nN]*)
