@@ -28,3 +28,4 @@ echo -e "${items[@]}\n"
 for key in "${!items[@]}"; do 
 	echo "$key: ${items[$key]}"
 done
+
