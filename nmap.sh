@@ -28,12 +28,13 @@ echo "
 
 
 read -p "Welcome which scan would you like to run: 
-1 ) sudo nmap <target_IP> -p- -sV
+1 ) sudo nmap -p- -sVC --stats-every=10 <target_IP>
 " -a USER_OPTION
 
 
 case $USER_OPTION in 
 	1)
-		(sudo nmap ${1} -p- -sV)
+		read -p "Target IP: " IP
+		(sudo nmap -p- -sVC --stats-every=10 ${IP})
 		;;
 	esac
