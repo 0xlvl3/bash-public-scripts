@@ -1,10 +1,14 @@
 #!/bin/bash
 
 # main will serve as script which is ran to play
+source intro.sh
 source game_items.sh
-
-items=(${!items[@]})
+source shop.sh
 
 echo "----"
-key=${items[0]}
-echo "${key} is here"
+
+for key in "${!items[@]}"; do 
+	echo "${key}: ${items[$key]} ooowow"
+done
+
+shop

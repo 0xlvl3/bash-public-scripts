@@ -17,15 +17,15 @@ items['Boots']=17
 items['Axe']=5
 
 # listing out the keys in our associative array
-echo "Listing keys"
-echo "${!items[@]}"
+# echo "Listing keys"
+# echo "${!items[@]}"
 
 # listing out the values in our associative array
-echo -e "\nListing values"
-echo -e "${items[@]}\n"
+# echo -e "\nListing values"
+# echo -e "${items[@]}\n"
 
 # looping through each key and value in our associative array
-for key in "${!items[@]}"; do 
-	echo "$key: ${items[$key]}"
-done
+# for key in "${!items[@]}"; do 
+#	echo "$key: ${items[$key]}"
+# done
 
