@@ -214,6 +214,7 @@ function battle(){
 	echo "----------------------------------"
 }
 
+# loop will call various functions depending on user input
 function battle_loop(){
 	read -p "Walking a monster attacks!
 	1) fight
@@ -230,31 +231,22 @@ function battle_loop(){
 	esac
 }
 
-# Stage 1 loop
-until [[ $GLOBAL_EXP -ge 100 ]]
-do 
-	battle_loop
+# level up loop, ${1} will be experience goal to level
+function stage_progress(){
+	until [[ $GLOBAL_EXP -ge ${1} ]]
+	do 
+		battle_loop
+		if [[ $GLOBAL_EXP -ge ${1} ]]; then 
+			GLOBAL_LEVEL=$(( $GLOBAL_LEVEL + 1 ))
+			echo -e "\n${GLOBAL_USER_NAME} has leveled up!"
+			echo "${GLOBAL_USER_NAME} is now level ${GLOBAL_LEVEL}"
+		fi 
+	done 
+}
 
-	if [[ $GLOBAL_EXP -ge 100 ]]; then
-		GLOBAL_LEVEL=$(( $GLOBAL_LEVEL + 1 ))
-		echo "You leveled up!"
-		echo "${GLOBAL_USER_NAME} is now level ${GLOBAL_LEVEL}"
-	fi
-done
-
-# Stage 2 loop
-until [[ $GLOBAL_EXP -ge 150 ]]
-do 
-	battle_loop
-
-	if [[ $GLOBAL_EXP -ge 150 ]]; then
-		GLOBAL_LEVEL=$(( $GLOBAL_LEVEL + 1 ))
-		echo "You leveled up!"
-		echo "${GLOBAL_USER_NAME} is now level ${GLOBAL_LEVEL}"
-	fi
-done
-
-
+stage_progress 100
+stage_progress 150
+stage_progress 200
 
 echo "Woah User:${GLOBAL_USER_NAME} Remaining HP:${GLOBAL_HP} Total Exp:${GLOBAL_EXP}"
 
