@@ -35,6 +35,27 @@ if [[ $GLOBAL_EXP -ge 100 ]]; then
 	GLOBAL_LEVEL=$(( $GLOBAL_LEVEL + 1 ))
 fi
 
+# function will drop some sort of loot when you defeat a monster
+function loot(){
+	
+	# loot 1 - 5
+	LOOT_DROP=$(( 1 + $RANDOM % 5 ))
+
+	case $LOOT_DROP in 
+		1)
+			echo -e "\nLoot obtained: ${1}";;
+		2)
+			echo -e "\nLoot obtained: ${2}";;
+		3)
+			echo -e "\nLoot obtained: ${3}";;
+		4)
+			echo -e "\nLoot obtained: ${4}";;
+		5)
+			echo -e "\nLoot obtained: ${5}";;
+		esac
+}
+
+
 #Intro
 
 general_dialogue "You awake to find yourself in a strange place, 
@@ -171,8 +192,6 @@ function spawn_monster(){
 		esac
 }
 
-# Function will give exp and loot
-# function loot_drop(){}
 
 #Function will fight monsters
 function battle(){
@@ -197,6 +216,7 @@ function battle(){
 		# Win or lose
 		if [[ $MONSTER_HP -le 0 ]]; then 
 			echo "${GLOBAL_USER_NAME} has defeated ${MONSTER_NAME}, gaining ${MONSTER_EXP}"
+			loot "sword" "dagger" "hat" "coat" "boots"
 			heal
 			GLOBAL_EXP=$(( $MONSTER_EXP + $GLOBAL_EXP ))
 			break;
